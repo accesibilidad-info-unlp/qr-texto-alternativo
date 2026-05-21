@@ -3,17 +3,22 @@ import sys
 import qrcode
 from PIL import Image
 
-BASE_URL = "https://mikrod-info.github.io/carteles-accesibles/carteles"
+# config base
+BASE_URL = "https://accesibilidad-info-unlp.github.io/plataforma-texto-alternativo/posts"
 OUTPUT_DIR = "output"
 LOGO_PATH = "assets/logo.png"
 COLOR = "black"
 BG_COLOR = "white"
 LOGO_DIM = 0.2
-START = int(sys.argv[1])
-END = int(sys.argv[2])
 
-def generate_qr(cartel_id):
-    url = f"{BASE_URL}/cartel-{cartel_id:02}/"
+# parámetros
+MATERIA = sys.argv[1]
+ANIO = sys.argv[2]
+START = int(sys.argv[3])
+END = int(sys.argv[4])
+
+def generate_qr(post_id):
+    url = f"{BASE_URL}/{MATERIA}/{ANIO}/post-{post_id:02}/"
 
     qr = qrcode.QRCode(
             version = None,
@@ -25,7 +30,10 @@ def generate_qr(cartel_id):
     qr.add_data(url)
     qr.make(fit=True)
 
-    img = qr.make_image(fill_color=COLOR, back_color=BG_COLOR).convert("RGB")
+    img = qr.make_image(
+            fill_color=COLOR,
+            back_color=BG_COLOR
+            ).convert("RGB")
 
     if LOGO_PATH and os.path.exists(LOGO_PATH):
         logo = Image.open(LOGO_PATH)
@@ -46,7 +54,7 @@ def generate_qr(cartel_id):
         else:
             img.paste(logo, pos)
 
-    filename = f"qr-cartel-{cartel_id:02}.png"
+    filename = f"qr-{post:02}.png"
     filepath = os.path.join(OUTPUT_DIR, filename)
 
     img.save(filepath)
