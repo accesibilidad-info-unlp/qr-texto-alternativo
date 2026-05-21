@@ -54,7 +54,7 @@ def generate_qr(post_id):
         else:
             img.paste(logo, pos)
 
-    filename = f"qr-{post:02}.png"
+    filename = f"qr-{post_id:02}.png"
     filepath = os.path.join(OUTPUT_DIR, filename)
 
     img.save(filepath)
