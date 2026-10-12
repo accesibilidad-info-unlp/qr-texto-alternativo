@@ -4,7 +4,7 @@ import qrcode
 from PIL import Image
 
 # config base
-BASE_URL = "https://pta.linti.unlp.edu.ar/plataforma-texto-alternativo/posts"
+BASE_URL = "https://pta.linti.unlp.edu.ar/posts"
 OUTPUT_DIR = "output"
 LOGO_PATH = "assets/logo.png"
 COLOR = "black"
